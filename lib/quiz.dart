@@ -6,7 +6,7 @@ import '';
 class Quiz extends StatelessWidget {
   final List<Map<String, Object>> questions;
   final int questionIndex;
-  final VoidCallback answerQuestion;
+  final Function answerQuestion;
 
   Quiz({
     @required this.questions,
@@ -23,7 +23,7 @@ class Quiz extends StatelessWidget {
         ),
         ...(questions[questionIndex]['answers'] as List<Map<String, Object>>)
             .map((answer) {
-          return Answer(answerQuestion, answer['text'] as String);
+          return Answer(() => answerQuestion(answer['score']), answer['text'] as String);
         }).toList()
       ],
     );
